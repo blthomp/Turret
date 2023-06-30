@@ -10,12 +10,15 @@ public class AmmoBehavior : MonoBehaviour
     public ParticleSystem explosionPrefab = null;
     float lifeTime = 0f;
     bool collided = false;
+    public AudioClip explosionSound = null;
+    AudioSource audioSource = null;
     
 
     // Start is called before the first frame update
     void Start()
     {
         explosionPrefab.Stop();
+        audioSource = GetComponent<AudioSource>();
         
     }
 
@@ -38,6 +41,7 @@ public class AmmoBehavior : MonoBehaviour
             lifeTime = 0f;
             collided = true;
             explosionPrefab.Play();
+            audioSource.PlayOneShot(explosionSound);
             GetComponent<Collider>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
             /*
